@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US" xmlns="http://purl.org/net/xbiblio/csl">
+  <info>
+    <title>Custom Citation Style</title>
+    <id>https://csl.mendeley.com/styles/custom-style</id>
+    <link href="http://www.zotero.org/styles/custom-style" rel="self"/>
+    <author>
+      <name>Your Name</name>
+      <email>your-email@example.com</email>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <category field="science"/>
+    <summary>Custom citation style based on provided criteria.</summary>
+    <updated>2025-02-02T10:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name delimiter=", " delimiter-precedes-last="always" et-al-min="4" et-al-use-first="3"/>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+
+  <macro name="titleField">
+    <choose>
+      <if type="article-journal">
+        <text macro="title" suffix="[J]. "/>
+      </if>
+      <else-if type="book">
+        <text macro="title" suffix="[M]. "/>
+      </else-if>
+      <else-if type="chapter">
+        <text macro="title" suffix="[A]. In: "/>
+        <names variable="editor" suffix=". "/>
+        <text variable="container-title" suffix="[M]. "/>
+      </else-if>
+      <else-if type="paper-conference">
+        <text macro="title" suffix="[A]. In: "/>
+        <text variable="container-title" suffix="[C]. "/>
+      </else-if>
+      <else-if type="thesis">
+        <text macro="title" suffix="[D]. "/>
+      </else-if>
+      <else-if type="report">
+        <text macro="title" suffix="[R]. "/>
+      </else-if>
+      <else-if type="patent">
+        <text macro="title" suffix="[P]. "/>
+        <text variable="number" prefix="Patent No: " suffix=". "/>
+      </else-if>
+      <else-if type="standard">
+        <text variable="number" suffix=". "/>
+        <text macro="title" suffix="[S]. "/>
+      </else-if>
+      <else-if type="webpage">
+        <text macro="title" suffix="[EB/OL]. "/>
+      </else-if>
+      <!-- Default to [J] if type is missing -->
+      <else>
+        <text macro="title" suffix="[J]. "/>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="publisher">
+    <text variable="publisher-place" suffix=": "/>
+    <text variable="publisher" suffix=", "/>
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="pageField">
+    <text variable="page" prefix=": "/>
+  </macro>
+
+  <!-- Remove DOI from citations -->
+  <macro name="removeDOI">
+    <choose>
+      <if variable="DOI">
+        <text value=""/>
+      </if>
+    </choose>
+  </macro>
+
+  <citation collapse="year-suffix-ranged">
+    <sort>
+      <key variable="citation-number" sort="ascending"/>
+    </sort>
+    <layout vertical-align="sup" prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography second-field-align="flush" entry-spacing="0">
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <text macro="author" suffix=". "/>
+      <text macro="titleField"/>
+      <text macro="publisher" suffix=". "/>
+      <text macro="pageField"/>
+      <text macro="removeDOI"/> <!-- Remove DOI from bibliography -->
+    </layout>
+  </bibliography>
+</style>
