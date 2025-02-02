@@ -87,7 +87,7 @@
     </choose>
   </macro>
 
-  <citation collapse="year-suffix-ranged">
+  <citation collapse="citation-number">
     <sort>
       <key variable="citation-number" sort="ascending"/>
     </sort>
